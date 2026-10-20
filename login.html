@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Acceso privado · MI TUCHI{% endblock %}{% block content %}
+<main class="center-wrap">
+<header class="brand"><div class="floating-heart">♡</div><h1>MI TUCHI<span>♥</span></h1><p>Solo tú, siempre tú</p></header>
+<section class="glass login-card"><div class="round-heart">♥</div><h2>{% if role == 'admin' %}Mi panel privado{% else %}Hola, mi {{ partner }} 💗{% endif %}</h2>
+<p class="sub">{% if role == 'admin' %}Entra para cuidar y actualizar vuestros recuerdos.{% else %}Escribe la contraseña que te compartí para abrir nuestra historia.{% endif %}</p>
+<form method="post"><label for="password">Contraseña</label><input id="password" name="password" type="password" placeholder="Escribe tu contraseña" autocomplete="current-password" required autofocus>
+<button class="primary" type="submit">ENTRAR <span>➜</span></button></form>
+{% if role == 'partner' %}<a class="small-link" href="{{ url_for('login', role='admin') }}">Acceso del administrador</a>{% endif %}
+</section></main>{% endblock %}

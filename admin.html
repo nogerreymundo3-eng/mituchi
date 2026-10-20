@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}Panel privado · MI TUCHI{% endblock %}{% block content %}
+<div class="topbar"><a class="mini-brand" href="{{ url_for('admin') }}">MI TUCHI ♥</a><form method="post" action="{{ url_for('logout') }}"><button class="ghost">Cerrar sesión ↗</button></form></div>
+<main class="admin-wrap"><header class="section-head"><span class="eyebrow">SOLO PARA TI</span><h1>Tu rincón de recuerdos 💗</h1><p>Edita la historia, escribe tu carta y sube fotos. Los cambios se guardan en la base de datos del servidor.</p></header>
+<section class="glass admin-card"><h2>✍️ Nuestra historia</h2><form method="post" action="{{ url_for('save') }}" class="stack">
+<div class="two-col"><div><label>Tu nombre o apodo</label><input name="owner_name" value="{{ owner }}" maxlength="80" required></div><div><label>Nombre de tu novia</label><input name="partner_name" value="{{ partner }}" maxlength="80" required></div></div>
+<label>Historia de ustedes</label><textarea name="story" rows="10" maxlength="30000" required>{{ story }}</textarea>
+<label>Mensaje especial de inicio</label><textarea name="love_note" rows="3" maxlength="5000" required>{{ note }}</textarea>
+<button class="primary" type="submit">Guardar cambios 💗</button></form></section>
+<section class="glass admin-card"><h2>📸 Añadir fotos</h2><p class="muted">Puedes elegir varias fotos a la vez. Formatos: JPG, PNG, WEBP o GIF; máximo 12 MB por envío.</p>
+<form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data" class="stack">
+<label>Selecciona las fotos desde tu teléfono</label><input class="file-input" type="file" name="photos" accept="image/jpeg,image/png,image/webp,image/gif" multiple required>
+<label>Descripción para estas fotos (opcional)</label><input name="caption" maxlength="180" placeholder="Ej. Un recuerdo que siempre guardaré 💞">
+<button class="primary" type="submit">Subir y guardar fotos</button></form></section>
+<section class="glass admin-card"><h2>💞 Fotos guardadas ({{ photos|length }})</h2>{% if photos %}<div class="photo-grid">{% for photo in photos %}<article class="photo-tile"><img src="{{ url_for('uploaded_photo', filename=photo.filename) }}" alt="Foto de recuerdo"><p>{{ photo.caption or 'Nuestro recuerdo ♥' }}</p><form method="post" action="{{ url_for('delete_photo', photo_id=photo.id) }}" onsubmit="return confirm('¿Eliminar esta foto?')"><button class="danger">Eliminar foto</button></form></article>{% endfor %}</div>{% else %}<p class="muted">Todavía no hay fotos. Cuando subas las primeras, aparecerán aquí.</p>{% endif %}</section>
+<a class="primary secondary-button" href="{{ url_for('love') }}">Vista de tu novia (requiere su acceso)</a>
+</main>{% endblock %}

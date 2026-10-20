@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}
+<main class="center-wrap">
+<header class="brand"><div class="floating-heart">♡</div><h1>MI TUCHI<span>♥</span></h1><p>Solo tú, siempre tú</p></header>
+<section class="glass landing-card"><div class="round-heart">♥</div><h2>Un lugar hecho para ti, {{ partner }} 💗</h2><p>Un rinconcito lleno de recuerdos, palabras bonitas y momentos que merecen quedarse para siempre.</p>
+<a class="primary" href="{{ url_for('login', role='partner') }}">Entrar a nuestros recuerdos <span>➜</span></a>
+<p class="tiny">Un espacio privado para compartir nuestro amor.</p>
+</section></main>{% endblock %}
